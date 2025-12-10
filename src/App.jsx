@@ -207,13 +207,13 @@ const generateBinarySearchSteps = (arr, targetVal) => {
       low = mid + 1;
       steps.push({ 
         array: snapshot(arr), compare: [], swap: [], sorted: [], range: { low, high, mid }, found: null, type: 'eliminate-left',
-        narration: `${arr[mid].value} is too small. Eliminating the left half.` 
+        narration: `${arr[mid].value} is smaller than target ${targetVal}. Eliminating the left half.` 
       });
     } else {
       high = mid - 1;
       steps.push({ 
         array: snapshot(arr), compare: [], swap: [], sorted: [], range: { low, high, mid }, found: null, type: 'eliminate-right',
-        narration: `${arr[mid].value} is too big. Eliminating the right half.` 
+        narration: `${arr[mid].value} is larger than target ${targetVal}. Eliminating the right half.` 
       });
     }
   }
@@ -357,6 +357,7 @@ const Navbar = ({ activeAlgo, setAlgo }) => {
 const ControlPanel = ({ 
   size, setSize, isPlaying, togglePlay, reset, randomize, 
   customInput, setCustomInput, handleCustomInput, 
+  customTargetInput, setCustomTargetInput,
   activeAlgo, isBinaryReady, binaryNotification,
   isTeachingMode, toggleTeachingMode
 }) => {
@@ -412,7 +413,7 @@ const ControlPanel = ({
           </div>
         )}
 
-        <div className="lg:col-span-3 w-full">
+        <div className="lg:col-span-3 w-full space-y-3">
            <div className="relative group">
               <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">{activeAlgo === 'BINARY' ? 'Array (Comma Sep)' : 'Custom Input'}</label>
               <div className="flex gap-2">
@@ -422,14 +423,36 @@ const ControlPanel = ({
                   disabled={isPlaying}
                   className={`w-full rounded-lg border bg-slate-950 px-3 py-2 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 transition-all ${activeAlgo === 'BINARY' && !isBinaryReady ? 'border-cyan-500/50 ring-1 ring-cyan-500/20' : 'border-white/10 focus:border-cyan-500/50 focus:ring-cyan-500/50'}`}
                 />
-                <button 
-                  onClick={handleCustomInput} disabled={isPlaying}
-                  className={`rounded-lg px-3 py-2 text-sm font-bold uppercase tracking-wider transition-all border ${activeAlgo === 'BINARY' ? 'bg-cyan-500 hover:bg-cyan-400 text-black border-cyan-400' : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border-white/5'} disabled:opacity-50`}
-                >
-                  Set
-                </button>
+                {activeAlgo !== 'BINARY' && (
+                  <button 
+                    onClick={handleCustomInput} disabled={isPlaying}
+                    className="rounded-lg px-3 py-2 text-sm font-bold uppercase tracking-wider transition-all border bg-slate-800 text-slate-300 hover:bg-slate-700 border-white/5 disabled:opacity-50"
+                  >
+                    Set
+                  </button>
+                )}
               </div>
            </div>
+
+           {activeAlgo === 'BINARY' && (
+              <div className="relative group">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">Target Element</label>
+                <div className="flex gap-2">
+                  <input 
+                    type="number" value={customTargetInput} onChange={(e) => setCustomTargetInput(e.target.value)}
+                    placeholder="e.g. 5"
+                    disabled={isPlaying}
+                    className={`w-full rounded-lg border bg-slate-950 px-3 py-2 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 transition-all ${!isBinaryReady ? 'border-cyan-500/50 ring-1 ring-cyan-500/20' : 'border-white/10 focus:border-cyan-500/50 focus:ring-cyan-500/50'}`}
+                  />
+                  <button 
+                    onClick={handleCustomInput} disabled={isPlaying}
+                    className="rounded-lg px-3 py-2 text-sm font-bold uppercase tracking-wider transition-all border bg-cyan-500 hover:bg-cyan-400 text-black border-cyan-400 disabled:opacity-50"
+                  >
+                    Set
+                  </button>
+                </div>
+              </div>
+           )}
         </div>
 
         <div className="flex flex-wrap items-center justify-end gap-2 lg:col-span-3">
@@ -492,6 +515,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [size, setSize] = useState(12);
   const [customInput, setCustomInput] = useState('');
+  const [customTargetInput, setCustomTargetInput] = useState('');
   
   // Teaching & Quiz State
   const [isTeachingMode, setIsTeachingMode] = useState(false);
@@ -510,6 +534,7 @@ const App = () => {
         setCurrentStep(0);
         setIsPlaying(false);
         setCustomInput('');
+        setCustomTargetInput('');
         setIsBinaryReady(false);
         setBinaryNotification('');
         setTarget(null);
@@ -585,20 +610,14 @@ const App = () => {
 
   // Narration Effect with Sequential Delay
   useEffect(() => {
-    // Clear any pending speech timeout when step changes or paused
     if (speechTimeout.current) clearTimeout(speechTimeout.current);
 
     if (isPlaying && isTeachingMode && steps[currentStep]?.narration) {
-        // 1. Cancel previous speech immediately
         if (window.speechSynthesis) window.speechSynthesis.cancel();
-
-        // 2. Wait a short delay before speaking next line
         speechTimeout.current = setTimeout(() => {
              speak(steps[currentStep].narration);
         }, 1350); // Tripled from 450
     }
-    
-    // Cleanup on unmount
     return () => {
         if (speechTimeout.current) clearTimeout(speechTimeout.current);
     };
@@ -648,15 +667,23 @@ const App = () => {
 
       if (nums.length > 0) {
           if (activeAlgo === 'BINARY') {
+             // Parse Manual Target
+             const manualTarget = parseInt(customTargetInput.trim());
+             if (isNaN(manualTarget)) {
+                 setBinaryNotification('Please enter a numeric target.');
+                 return;
+             }
+
             const isSorted = nums.every((val, i, arr) => !i || (arr[i-1].value <= val.value));
             if (!isSorted) {
                 nums.sort((a,b) => a.value - b.value);
-                setBinaryNotification('Input was automatically sorted.');
+                setBinaryNotification('Input sorted automatically.');
             } else {
-                setBinaryNotification('Array set successfully.');
+                setBinaryNotification('Array & Target set.');
             }
-            const randomTarget = nums[Math.floor(Math.random() * nums.length)].value;
-            setTarget(randomTarget);
+            
+            // Set the manual target instead of random
+            setTarget(manualTarget);
             setIsBinaryReady(true);
           }
           setArray(nums);
@@ -705,6 +732,7 @@ const App = () => {
             reset={() => { setIsPlaying(false); setCurrentStep(0); setShowQuiz(false); }}
             randomize={() => generateArray(size)}
             customInput={customInput} setCustomInput={setCustomInput} handleCustomInput={handleCustomInputSubmit}
+            customTargetInput={customTargetInput} setCustomTargetInput={setCustomTargetInput}
             activeAlgo={activeAlgo} isBinaryReady={isBinaryReady} binaryNotification={binaryNotification}
             isTeachingMode={isTeachingMode} toggleTeachingMode={() => setIsTeachingMode(!isTeachingMode)}
         />
