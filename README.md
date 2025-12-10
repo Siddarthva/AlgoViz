@@ -4,20 +4,7 @@
 
 Interactive Algorithm Visualizer
 
-<p>
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/React-20232A%3Fstyle%3Dfor-the-badge%26logo%3Dreact%26logoColor%3D61DAFB" alt="React" />
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/Vite-646CFF%3Fstyle%3Dfor-the-badge%26logo%3Dvite%26logoColor%3Dwhite" alt="Vite" />
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/Tailwind_CSS-38B2AC%3Fstyle%3Dfor-the-badge%26logo%3Dtailwind-css%26logoColor%3Dwhite" alt="Tailwind CSS" />
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/Framer_Motion-0055FF%3Fstyle%3Dfor-the-badge%26logo%3Dframer%26logoColor%3Dwhite" alt="Framer Motion" />
-</p>
 
-<p>
-<a href="#-features">Features</a> •
-<a href="#-getting-started">Getting Started</a> •
-<a href="#-technologies-used">Tech Stack</a> •
-<a href="#-screenshots">Screenshots</a> •
-<a href="#-roadmap">Roadmap</a>
-</p>
 
 </div>
 
@@ -49,11 +36,6 @@ Insertion Sort: Watch how arrays are built one item at a time.
 
 Binary Search: Interactive pointer tracking for O(log n) lookups.
 
-🛠 Educational Tools (WIP)
-
-Step-by-Step Mode: Pause and step through algorithms manually.
-
-Narrated Explanations: Browser-native Text-to-Speech integration (Web Speech API).
 
 🧠 Technologies Used
 
@@ -91,7 +73,7 @@ Prerequisites
 
 Node.js (v16 or higher)
 
-npm or yarn
+npm 
 
 Installation
 
@@ -118,27 +100,6 @@ npm run dev
 Open in your browser
 Visit http://localhost:5173 to view the app.
 
-📁 Project Structure
-
-src/
-├── components/       # Reusable UI components
-├── algorithms/       # Sorting and searching logic
-├── assets/           # Static images and icons
-├── App.jsx           # Main application entry
-├── main.jsx          # React DOM rendering
-└── index.css         # Tailwind directives & global styles
-
-
-✨ Screenshots
-
-Add your screenshots here to showcase the UI.
-
-Sorting Visualization
-
-Binary Search
-
-
-
 
 
 🚀 Roadmap
@@ -156,32 +117,6 @@ Binary Search
 [ ] Dynamic Scaling: Auto-adjust bar sizes based on screen width.
 
 [ ] Speed Control: Slider to adjust animation speed.
-
-🤝 Contribution
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
-
-Fork the Project
-
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
-
-Commit your Changes (git commit -m 'Add some AmazingFeature')
-
-Push to the Branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
-
-Guidelines:
-
-Follow React best practices (Hooks, Functional Components).
-
-Keep Tailwind classes organized.
-
-Maintain the "Neon Cyber" design language.
-
-📄 License
-
-Distributed under the MIT License. See LICENSE for more information.
 
 <div align="center">
 <p>Built with ❤️ by <a href="https://www.google.com/search?q=https://github.com/Siddarthva">Siddarthva</a></p>
