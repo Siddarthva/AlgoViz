@@ -314,7 +314,11 @@ const Navbar = ({ activeAlgo, setAlgo }) => {
                <span className="text-sm font-bold text-cyan-400">AV</span>
             </div>
             <div className="h-6 w-[1px] bg-white/10"></div>
-            <h1 className="hidden md:block text-lg font-bold tracking-wider text-slate-100 uppercase">
+            {/* Import Cyber Fonts */}
+            <style>
+              {`@import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap');`}
+            </style>
+            <h1 className="hidden md:block text-3xl font-bold tracking-widest text-slate-100 uppercase" style={{ fontFamily: "'Rubik Distressed', cursive" }}>
               Algo<span className="text-cyan-400">Viz</span>
             </h1>
           </div>
@@ -461,7 +465,12 @@ const ControlPanel = ({
               <Shuffle size={14} /> Rand
             </button>
           )}
-          <button onClick={reset} disabled={isPlaying} className="flex items-center gap-2 rounded-lg border border-white/10 bg-slate-800/50 px-3 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-300 transition-all hover:bg-slate-700 hover:text-white disabled:opacity-50">
+          <button 
+            onClick={reset} 
+            disabled={isPlaying} 
+            className="flex items-center gap-2 rounded-lg border border-white/10 bg-slate-800/50 px-3 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-300 transition-all hover:bg-slate-700 hover:text-white disabled:opacity-50"
+            style={{ fontFamily: '"Rubik Distressed", system-ui', fontWeight: 400, fontStyle: 'normal' }}
+          >
             <RotateCcw size={14} /> Reset
           </button>
           <button 
@@ -712,7 +721,7 @@ const App = () => {
 
       <Navbar activeAlgo={activeAlgo} setAlgo={(a) => { setActiveAlgo(a); setIsPlaying(false); setSteps([]); setCurrentStep(0); setShowQuiz(false); }} />
 
-      <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 mt-16">
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
                 <h2 className="text-3xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-500 drop-shadow-sm">{ALGORITHMS[activeAlgo]}</h2>
