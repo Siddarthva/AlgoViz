@@ -1,16 +1,62 @@
-# React + Vite
+🧠 Technologies Used
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project relies on a modern, lightweight, and completely free tech stack. No paid APIs are used.
 
-Currently, two official plugins are available:
+Technology
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Purpose
 
-## React Compiler
+React + Vite
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Core frontend framework for high performance.
 
-## Expanding the ESLint configuration
+Tailwind CSS
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Utility-first styling for the neon UI system.
+
+Framer Motion
+
+Complex, physics-based layout animations.
+
+Lucide React
+
+crisp, lightweight icons.
+
+Web Speech API
+
+Native browser API for voice narration.
+
+📦 Getting Started
+
+Follow these steps to set up the project locally.
+
+Prerequisites
+
+Node.js (v16 or higher)
+
+npm or yarn
+
+Installation
+
+Clone the repository
+
+git clone [https://github.com/Siddarthva/AlgoViz.git](https://github.com/Siddarthva/AlgoViz.git)
+
+
+Navigate to the project directory
+
+cd AlgoViz
+
+
+Install dependencies
+
+npm install
+
+
+Start the development server
+
+npm run dev
+
+
+Open in your browser
+Visit http://localhost:5173 to view the app
