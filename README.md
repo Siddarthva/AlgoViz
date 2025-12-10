@@ -59,4 +59,7 @@ Then in your terminal:
 git clone https://github.com/Siddarthva/AlgoViz.git
 cd AlgoViz
 npm install
+npm install framer-motion
+npm install lucide-react
+
 npm run dev
