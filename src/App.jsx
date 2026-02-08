@@ -2305,10 +2305,10 @@ const Sidebar = () => {
           className="text-2xl font-black tracking-tight mb-1"
           style={{ color: theme.primary, fontFamily: 'monospace' }}
         >
-          AlgoLab
+          Algoviz
         </h1>
         <p className="text-xs uppercase tracking-wider" style={{ color: theme.textMuted }}>
-          Pro Edition
+          Algorithm Visualizer
         </p>
       </div>
 
